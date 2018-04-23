@@ -267,7 +267,13 @@ Citizen.CreateThread(function()
 
         if not ESX.UI.Menu.IsOpen('phone', GetCurrentResourceName(), 'main') then
           ESX.UI.Menu.CloseAll()
-          ESX.UI.Menu.Open('phone', GetCurrentResourceName(), 'main')
+              ESX.TriggerServerCallback('esx_phone:getItemAmount', function(qtty)
+                if qtty > 0 then
+                    ESX.UI.Menu.Open('phone', GetCurrentResourceName(), 'main')
+                else
+                    ESX.ShowNotification("~r~Du har ingen telefon.")
+                end
+                end, 'phone')
         end
 
         GUI.Time = GetGameTimer()
