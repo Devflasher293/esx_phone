@@ -309,3 +309,9 @@ RegisterServerEvent('esx_phone:stopDispatch')
 AddEventHandler('esx_phone:stopDispatch', function(dispatchRequestId)
   TriggerClientEvent('esx_phone:stopDispatch', -1, dispatchRequestId, GetPlayerName(source))
 end)
+
+ESX.RegisterServerCallback('esx_phone:getItemAmount', function(source, cb, item)
+    local xPlayer = ESX.GetPlayerFromId(source)
+    local qtty = xPlayer.getInventoryItem(item).count
+    cb(qtty)
+end)
